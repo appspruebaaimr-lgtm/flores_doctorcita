@@ -1,230 +1,1766 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Para ti 🌻</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Para ti</title>
+
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html,
         body {
             width: 100%;
-            min-height: 100vh;
+            height: 100%;
             overflow: hidden;
-
-            background:
-                radial-gradient(circle at center, #332600 0%, #120f05 45%, #050505 100%);
-
-            font-family: Georgia, serif;
-            color: white;
         }
 
-        .contenedor {
+        body {
+
+            background:
+                radial-gradient(
+                    circle at 50% 55%,
+                    #40330e 0%,
+                    #1b180b 35%,
+                    #090a10 70%,
+                    #020307 100%
+                );
+
+            font-family: Georgia, serif;
+        }
+
+
+        /* =====================================================
+           ESCENA
+        ===================================================== */
+
+        #scene {
+
             position: relative;
+
             width: 100%;
             height: 100vh;
 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            text-align: center;
-            z-index: 5;
+            overflow: hidden;
         }
 
-        h1 {
-            font-size: clamp(35px, 9vw, 70px);
-            color: #ffd83d;
 
-            text-shadow:
-                0 0 10px #ffcc00,
-                0 0 25px #ffb300,
-                0 0 50px #ff8c00;
+        /* =====================================================
+           LUNA
+        ===================================================== */
 
-            animation: aparecer 2s ease forwards;
-        }
+        .moon {
 
-        p {
-            margin-top: 20px;
-
-            max-width: 80%;
-            font-size: clamp(18px, 4vw, 27px);
-
-            color: #fff4bd;
-
-            animation: aparecer 3s ease forwards;
-        }
-
-        .flor {
             position: absolute;
 
-            font-size: 70px;
+            width: 105px;
+            height: 105px;
 
-            filter:
-                drop-shadow(0 0 10px #ffd000)
-                drop-shadow(0 0 25px #ffae00);
+            top: 7%;
+            left: 9%;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle at 35% 32%,
+                    #fffef0 0%,
+                    #fff5bd 50%,
+                    #e5c95d 100%
+                );
+
+            box-shadow:
+                0 0 20px rgba(255,246,180,.9),
+                0 0 50px rgba(255,225,100,.45),
+                0 0 100px rgba(255,220,80,.2);
+
+            z-index: 1;
+        }
+
+
+        /* =====================================================
+           ESTRELLAS
+        ===================================================== */
+
+        .star {
+
+            position: absolute;
+
+            width: 3px;
+            height: 3px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            box-shadow:
+                0 0 8px white;
 
             animation:
-                aparecerFlor 2s ease forwards,
-                flotar 5s ease-in-out infinite;
+                twinkle 3s infinite ease-in-out;
+
+            z-index: 0;
         }
 
-        .f1 {
-            left: 8%;
-            bottom: 10%;
-            animation-delay: .2s;
-        }
 
-        .f2 {
-            left: 25%;
-            top: 12%;
-            font-size: 50px;
-            animation-delay: .6s;
-        }
+        @keyframes twinkle {
 
-        .f3 {
-            right: 8%;
-            bottom: 15%;
-            font-size: 85px;
-            animation-delay: 1s;
-        }
+            0%,
+            100% {
 
-        .f4 {
-            right: 22%;
-            top: 10%;
-            font-size: 55px;
-            animation-delay: 1.4s;
-        }
+                opacity: .25;
 
-        .f5 {
-            left: 45%;
-            bottom: 5%;
-            font-size: 45px;
-            animation-delay: 1.8s;
-        }
-
-        .petalo {
-            position: absolute;
-            top: -50px;
-
-            font-size: 25px;
-
-            animation: caer linear infinite;
-
-            opacity: .8;
-        }
-
-        .p1 {
-            left: 10%;
-            animation-duration: 7s;
-        }
-
-        .p2 {
-            left: 30%;
-            animation-duration: 9s;
-            animation-delay: 2s;
-        }
-
-        .p3 {
-            left: 55%;
-            animation-duration: 8s;
-            animation-delay: 1s;
-        }
-
-        .p4 {
-            left: 80%;
-            animation-duration: 10s;
-            animation-delay: 3s;
-        }
-
-        @keyframes aparecer {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes aparecerFlor {
-            from {
-                opacity: 0;
-                transform: scale(0);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes flotar {
-            0%, 100% {
-                transform: translateY(0) rotate(-3deg);
+                transform:
+                    scale(.7);
             }
 
             50% {
-                transform: translateY(-15px) rotate(3deg);
+
+                opacity: 1;
+
+                transform:
+                    scale(1.5);
             }
         }
 
-        @keyframes caer {
+
+        /* =====================================================
+           SUELO
+        ===================================================== */
+
+        .ground {
+
+            position: absolute;
+
+            bottom: -20px;
+            left: -10%;
+
+            width: 120%;
+            height: 17%;
+
+            background:
+                radial-gradient(
+                    ellipse at center,
+                    #29391b 0%,
+                    #17230f 55%,
+                    #080d08 100%
+                );
+
+            border-radius:
+                50% 50% 0 0;
+
+            box-shadow:
+                0 -10px 40px rgba(0,0,0,.5);
+
+            z-index: 8;
+        }
+
+
+        /* =====================================================
+           ÁRBOL
+        ===================================================== */
+
+        #tree {
+
+            position: absolute;
+
+            left: 50%;
+            bottom: 5%;
+
+            width: min(690px, 100vw);
+            height: 83%;
+
+            transform:
+                translateX(-50%);
+
+            overflow: visible;
+
+            z-index: 4;
+        }
+
+
+        /* =====================================================
+           TRONCO
+        ===================================================== */
+
+        .trunk {
+
+            fill: none;
+
+            stroke: #382212;
+
+            stroke-width: 48;
+
+            stroke-linecap: round;
+            stroke-linejoin: round;
+
+            stroke-dasharray: 1200;
+            stroke-dashoffset: 1200;
+
+            animation:
+                growTree 5s ease-out forwards;
+        }
+
+
+        .trunk-light {
+
+            fill: none;
+
+            stroke: #634020;
+
+            stroke-width: 12;
+
+            stroke-linecap: round;
+
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+
+            animation:
+                growTree 5s ease-out .3s forwards;
+        }
+
+
+        .trunk-secondary {
+
+            fill: none;
+
+            stroke: #29170d;
+
+            stroke-width: 25;
+
+            stroke-linecap: round;
+
+            stroke-dasharray: 800;
+            stroke-dashoffset: 800;
+
+            animation:
+                growTree 5s ease-out .15s forwards;
+        }
+
+
+        @keyframes growTree {
+
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+
+        /* =====================================================
+           RAMAS
+           
+           MÁS GRUESAS
+        ===================================================== */
+
+        .branch {
+
+            fill: none;
+
+            stroke: #432914;
+
+            /*
+             * Antes: 12px
+             * Ahora: 18px
+             */
+
+            stroke-width: 18;
+
+            stroke-linecap: round;
+            stroke-linejoin: round;
+
+            stroke-dasharray: 650;
+            stroke-dashoffset: 650;
+
+            animation:
+                growBranch 3s ease-out forwards;
+        }
+
+
+        .branch.small {
+
+            /*
+             * Antes: 6px
+             * Ahora: 9px
+             */
+
+            stroke-width: 9;
+        }
+
+
+        @keyframes growBranch {
+
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+
+        /* =====================================================
+           FLORES
+        ===================================================== */
+
+        #flowers {
+
+            position: absolute;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            z-index: 6;
+        }
+
+
+        .flower {
+
+            position: absolute;
+
+            width: 31px;
+            height: 31px;
+
+            transform:
+                translate(-50%, -50%)
+                scale(0);
+
+            animation:
+                bloom .9s
+                cubic-bezier(.17,.89,.32,1.3)
+                forwards;
+
+            filter:
+                drop-shadow(
+                    0 0 5px
+                    rgba(255,200,0,.75)
+                )
+                drop-shadow(
+                    0 0 12px
+                    rgba(255,170,0,.35)
+                );
+        }
+
+
+        .flower-inner {
+
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            width: 9px;
+            height: 9px;
+
+            transform:
+                translate(-50%, -50%);
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #532c00,
+                    #9a5700 60%,
+                    #d78b00
+                );
+
+            z-index: 5;
+        }
+
+
+        .petal {
+
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            width: 14px;
+            height: 22px;
+
+            transform-origin:
+                50% 100%;
+
+            border-radius:
+                60% 60% 55% 55%;
+
+            background:
+                radial-gradient(
+                    circle at 35% 30%,
+                    #fff7a0,
+                    #ffd52e 45%,
+                    #e6a600 100%
+                );
+
+            transform:
+                translate(-50%, -100%)
+                rotate(var(--rotation))
+                translateY(-10px);
+        }
+
+
+        @keyframes bloom {
+
             0% {
+
+                opacity: 0;
+
                 transform:
-                    translateY(-50px)
-                    rotate(0deg);
+                    translate(-50%, -50%)
+                    scale(0)
+                    rotate(-30deg);
+            }
+
+            70% {
+
+                opacity: 1;
+
+                transform:
+                    translate(-50%, -50%)
+                    scale(1.15)
+                    rotate(8deg);
             }
 
             100% {
+
+                opacity: 1;
+
                 transform:
-                    translateY(110vh)
-                    rotate(360deg);
+                    translate(-50%, -50%)
+                    scale(1)
+                    rotate(0deg);
             }
         }
+
+
+        /* =====================================================
+           PÉTALOS DEL VIENTO
+        ===================================================== */
+
+        #petals {
+
+            position: absolute;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            overflow: hidden;
+
+            z-index: 10;
+        }
+
+
+        .flying-petal {
+
+            position: absolute;
+
+            width: 13px;
+            height: 22px;
+
+            border-radius:
+                70% 40% 70% 40%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff18b,
+                    #ffc928 45%,
+                    #e79b00
+                );
+
+            box-shadow:
+                0 0 8px
+                rgba(255,193,7,.5);
+
+            animation:
+                flyPetal
+                var(--duration)
+                linear forwards;
+        }
+
+
+        @keyframes flyPetal {
+
+            0% {
+
+                transform:
+                    translate3d(0,0,0)
+                    rotate(0deg)
+                    scale(.7);
+
+                opacity: 0;
+            }
+
+            8% {
+                opacity: .95;
+            }
+
+            50% {
+
+                transform:
+                    translate3d(
+                        calc(var(--wind-x) * .45),
+                        calc(var(--wind-y) * .5),
+                        0
+                    )
+                    rotate(180deg)
+                    scale(1);
+            }
+
+            100% {
+
+                transform:
+                    translate3d(
+                        var(--wind-x),
+                        var(--wind-y),
+                        0
+                    )
+                    rotate(600deg)
+                    scale(.45);
+
+                opacity: 0;
+            }
+        }
+
+
+        /* =====================================================
+           PARTÍCULAS
+        ===================================================== */
+
+        #particles {
+
+            position: absolute;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            z-index: 3;
+        }
+
+
+        .particle {
+
+            position: absolute;
+
+            width: 4px;
+            height: 4px;
+
+            border-radius: 50%;
+
+            background: #ffe477;
+
+            box-shadow:
+                0 0 8px #ffd83d;
+
+            animation:
+                particleFloat
+                5s
+                ease-in-out
+                infinite;
+        }
+
+
+        @keyframes particleFloat {
+
+            0%,
+            100% {
+
+                opacity: .15;
+
+                transform:
+                    translateY(0)
+                    scale(.6);
+            }
+
+            50% {
+
+                opacity: .9;
+
+                transform:
+                    translateY(-35px)
+                    scale(1.2);
+            }
+        }
+
+
+        /* =====================================================
+           MENSAJE FINAL
+           
+           SOLO TEXTO
+        ===================================================== */
+
+        #message {
+
+            position: absolute;
+
+            left: 50%;
+            top: 9%;
+
+            transform:
+                translateX(-50%)
+                translateY(20px);
+
+            width: 90%;
+
+            text-align: center;
+
+            color: #fff4bd;
+
+            opacity: 0;
+
+            z-index: 30;
+
+            animation:
+                messageAppear
+                2s ease-out
+                11s forwards;
+        }
+
+
+        #message h1 {
+
+            font-size:
+                clamp(32px,8vw,62px);
+
+            color: #ffd83d;
+
+            text-shadow:
+                0 0 10px #ffcf28,
+                0 0 30px
+                rgba(255,180,0,.7);
+        }
+
+
+        #message p {
+
+            margin-top: 12px;
+
+            font-size:
+                clamp(16px,4vw,23px);
+
+            line-height: 1.5;
+        }
+
+
+        @keyframes messageAppear {
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateX(-50%)
+                    translateY(0);
+            }
+        }
+
+
+        /* =====================================================
+           PANTALLA INICIAL
+        ===================================================== */
+
+        #startScreen {
+
+            position: absolute;
+
+            inset: 0;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            flex-direction: column;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #211c09,
+                    #05060a
+                );
+
+            z-index: 100;
+
+            transition:
+                opacity 1.5s ease,
+                visibility 1.5s ease;
+        }
+
+
+        #startScreen.hidden {
+
+            opacity: 0;
+
+            visibility: hidden;
+        }
+
+
+        #startScreen h2 {
+
+            color: #ffd83d;
+
+            font-size:
+                clamp(28px,7vw,48px);
+
+            margin-bottom: 25px;
+
+            text-align: center;
+
+            text-shadow:
+                0 0 20px #dca800;
+        }
+
+
+        #startButton {
+
+            border:
+                1px solid #e5b72e;
+
+            background:
+                rgba(255,204,51,.08);
+
+            color: #ffe77b;
+
+            padding:
+                14px 30px;
+
+            border-radius: 40px;
+
+            font-family: Georgia, serif;
+
+            font-size: 18px;
+
+            cursor: pointer;
+
+            transition: .3s ease;
+
+            box-shadow:
+                0 0 20px
+                rgba(255,193,7,.2);
+        }
+
+
+        #startButton:hover {
+
+            background:
+                rgba(255,204,51,.2);
+
+            box-shadow:
+                0 0 35px
+                rgba(255,193,7,.5);
+
+            transform:
+                scale(1.05);
+        }
+
+
+        /* =====================================================
+           CELULAR
+        ===================================================== */
+
+        @media (max-width: 600px) {
+
+            .moon {
+
+                width: 70px;
+                height: 70px;
+
+                top: 6%;
+                left: 7%;
+            }
+
+
+            #tree {
+
+                width: 125vw;
+
+                height: 78%;
+
+                bottom: 7%;
+            }
+
+
+            .flower {
+
+                width: 27px;
+                height: 27px;
+            }
+
+
+            .petal {
+
+                width: 12px;
+                height: 19px;
+            }
+
+
+            /*
+             * Las ramas también se mantienen
+             * un poco más gruesas en móvil.
+             */
+
+            .branch {
+                stroke-width: 15;
+            }
+
+            .branch.small {
+                stroke-width: 8;
+            }
+
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <!-- Flores principales -->
 
-    <div class="flor f1">🌻</div>
-    <div class="flor f2">🌼</div>
-    <div class="flor f3">🌻</div>
-    <div class="flor f4">🌼</div>
-    <div class="flor f5">🌻</div>
+<div id="scene">
 
 
-    <!-- Pétalos cayendo -->
+    <!-- =================================================
+         LUNA
+    ================================================== -->
 
-    <div class="petalo p1">🌼</div>
-    <div class="petalo p2">🌻</div>
-    <div class="petalo p3">🌼</div>
-    <div class="petalo p4">🌻</div>
+    <div class="moon"></div>
 
 
-    <!-- Mensaje -->
+    <!-- =================================================
+         ESTRELLAS
+    ================================================== -->
 
-    <div class="contenedor">
+    <div class="star"
+         style="left:25%;top:9%;">
+    </div>
 
-        <h1>Para ti 🌻</h1>
+    <div class="star"
+         style="left:42%;top:13%;animation-delay:1s;">
+    </div>
+
+    <div class="star"
+         style="left:62%;top:8%;animation-delay:.4s;">
+    </div>
+
+    <div class="star"
+         style="left:78%;top:17%;animation-delay:2s;">
+    </div>
+
+    <div class="star"
+         style="left:91%;top:11%;animation-delay:.8s;">
+    </div>
+
+    <div class="star"
+         style="left:18%;top:30%;animation-delay:1.5s;">
+    </div>
+
+    <div class="star"
+         style="left:84%;top:31%;animation-delay:2.2s;">
+    </div>
+
+    <div class="star"
+         style="left:55%;top:27%;animation-delay:.7s;">
+    </div>
+
+
+    <!-- =================================================
+         PARTÍCULAS
+    ================================================== -->
+
+    <div id="particles"></div>
+
+
+    <!-- =================================================
+         ÁRBOL
+    ================================================== -->
+
+    <svg id="tree"
+         viewBox="0 0 700 800"
+         preserveAspectRatio="xMidYMax meet">
+
+
+        <!-- =================================================
+             TRONCO PRINCIPAL
+        ================================================== -->
+
+        <path
+            class="trunk"
+            d="
+                M350 790
+
+                C320 735
+                315 680
+                330 620
+
+                C350 550
+                365 500
+                350 440
+
+                C335 375
+                340 320
+                350 270
+
+                C355 215
+                350 170
+                350 125
+            "
+        />
+
+
+        <!-- =================================================
+             LUZ DEL TRONCO
+        ================================================== -->
+
+        <path
+            class="trunk-light"
+            d="
+                M350 790
+
+                C320 735
+                315 680
+                330 620
+
+                C350 550
+                365 500
+                350 440
+
+                C335 375
+                340 320
+                350 270
+
+                C355 215
+                350 170
+                350 125
+            "
+        />
+
+
+        <!-- =================================================
+             PARTE SECUNDARIA DEL TRONCO
+        ================================================== -->
+
+        <path
+            class="trunk-secondary"
+            d="
+                M350 780
+
+                C390 715
+                395 650
+                375 590
+
+                C360 545
+                350 505
+                360 460
+            "
+        />
+
+
+        <!-- =================================================
+             RAMAS PRINCIPALES
+        ================================================== -->
+
+        <path
+            class="branch"
+            style="animation-delay:4s"
+            d="
+                M350 535
+
+                C300 500
+                250 455
+                195 385
+
+                C160 340
+                125 300
+                80 270
+            "
+        />
+
+
+        <path
+            class="branch"
+            style="animation-delay:4.2s"
+            d="
+                M350 535
+
+                C400 500
+                450 455
+                505 385
+
+                C540 340
+                575 300
+                620 270
+            "
+        />
+
+
+        <path
+            class="branch"
+            style="animation-delay:4.4s"
+            d="
+                M345 405
+
+                C300 355
+                260 305
+                225 245
+
+                C200 205
+                175 175
+                145 150
+            "
+        />
+
+
+        <path
+            class="branch"
+            style="animation-delay:4.6s"
+            d="
+                M355 405
+
+                C400 355
+                440 305
+                475 245
+
+                C500 205
+                525 175
+                555 150
+            "
+        />
+
+
+        <!-- =================================================
+             RAMAS SECUNDARIAS
+        ================================================== -->
+
+        <path
+            class="branch small"
+            style="animation-delay:5s"
+            d="
+                M195 385
+                C165 350
+                150 315
+                145 270
+            "
+        />
+
+
+        <path
+            class="branch small"
+            style="animation-delay:5.1s"
+            d="
+                M195 385
+                C150 365
+                110 330
+                75 300
+            "
+        />
+
+
+        <path
+            class="branch small"
+            style="animation-delay:5.2s"
+            d="
+                M505 385
+                C535 350
+                550 315
+                555 270
+            "
+        />
+
+
+        <path
+            class="branch small"
+            style="animation-delay:5.3s"
+            d="
+                M505 385
+                C550 365
+                590 330
+                625 300
+            "
+        />
+
+
+        <path
+            class="branch small"
+            style="animation-delay:5.4s"
+            d="
+                M225 245
+                C190 220
+                165 185
+                145 150
+            "
+        />
+
+
+        <path
+            class="branch small"
+            style="animation-delay:5.5s"
+            d="
+                M475 245
+                C510 220
+                535 185
+                555 150
+            "
+        />
+
+    </svg>
+
+
+    <!-- =================================================
+         FLORES
+    ================================================== -->
+
+    <div id="flowers"></div>
+
+
+    <!-- =================================================
+         PÉTALOS
+    ================================================== -->
+
+    <div id="petals"></div>
+
+
+    <!-- =================================================
+         MENSAJE FINAL
+    ================================================== -->
+
+    <div id="message">
+
+        <h1>
+            Para ti
+        </h1>
 
         <p>
-            Porque algunas cosas bonitas
-            simplemente merecen ser compartidas.
+            Que nunca falten flores<br>
+            en nuestro camino.
         </p>
 
     </div>
 
+
+    <!-- =================================================
+         PANTALLA INICIAL
+    ================================================== -->
+
+    <div id="startScreen">
+
+        <h2>
+            Hay algo esperando por ti...
+        </h2>
+
+        <button id="startButton">
+            Toca para descubrir 🌻
+        </button>
+
+    </div>
+
+
+    <!-- =================================================
+         SUELO
+    ================================================== -->
+
+    <div class="ground"></div>
+
+
+</div>
+
+
+
+<script>
+
+
+    /* =====================================================
+       ELEMENTOS
+    ===================================================== */
+
+    const flowerContainer =
+        document.getElementById("flowers");
+
+    const petalContainer =
+        document.getElementById("petals");
+
+    const particleContainer =
+        document.getElementById("particles");
+
+    const startScreen =
+        document.getElementById("startScreen");
+
+    const startButton =
+        document.getElementById("startButton");
+
+
+    /* =====================================================
+       PARTÍCULAS
+    ===================================================== */
+
+    for (let i = 0; i < 35; i++) {
+
+        const particle =
+            document.createElement("div");
+
+        particle.className =
+            "particle";
+
+        particle.style.left =
+            Math.random() * 100 + "%";
+
+        particle.style.top =
+            (20 + Math.random() * 70) + "%";
+
+        particle.style.animationDelay =
+            Math.random() * 5 + "s";
+
+        particle.style.animationDuration =
+            (3 + Math.random() * 4) + "s";
+
+        particleContainer.appendChild(
+            particle
+        );
+    }
+
+
+    /* =====================================================
+       CORAZÓN MATEMÁTICO
+    ===================================================== */
+
+    function heartPoint(t) {
+
+        const x =
+            16 *
+            Math.pow(
+                Math.sin(t),
+                3
+            );
+
+        const y =
+            13 * Math.cos(t)
+            - 5 * Math.cos(2 * t)
+            - 2 * Math.cos(3 * t)
+            - Math.cos(4 * t);
+
+        return {
+            x,
+            y
+        };
+    }
+
+
+    /* =====================================================
+       CREAR FLOR
+    ===================================================== */
+
+    function createFlower(
+        x,
+        y,
+        delay = 0
+    ) {
+
+        const flower =
+            document.createElement("div");
+
+        flower.className =
+            "flower";
+
+        flower.style.left =
+            x + "%";
+
+        flower.style.top =
+            y + "%";
+
+        flower.style.animationDelay =
+            delay + "s";
+
+
+        /*
+         * Seis pétalos.
+         */
+
+        for (let i = 0; i < 6; i++) {
+
+            const petal =
+                document.createElement("div");
+
+            petal.className =
+                "petal";
+
+            petal.style.setProperty(
+                "--rotation",
+                (i * 60) + "deg"
+            );
+
+            flower.appendChild(
+                petal
+            );
+        }
+
+
+        const center =
+            document.createElement("div");
+
+        center.className =
+            "flower-inner";
+
+        flower.appendChild(
+            center
+        );
+
+
+        flowerContainer.appendChild(
+            flower
+        );
+
+
+        flower.dataset.x =
+            x;
+
+        flower.dataset.y =
+            y;
+
+
+        return flower;
+    }
+
+
+    /* =====================================================
+       EVITAR FLORES SOBRE EL TRONCO
+    ===================================================== */
+
+    function isInsideTrunk(x, y) {
+
+        if (
+            x > 42 &&
+            x < 58 &&
+            y > 23 &&
+            y < 72
+        ) {
+
+            return true;
+        }
+
+
+        if (
+            x > 46 &&
+            x < 54 &&
+            y > 15 &&
+            y < 32
+        ) {
+
+            return true;
+        }
+
+
+        return false;
+    }
+
+
+    /* =====================================================
+       CREAR CORAZÓN DE FLORES
+    ===================================================== */
+
+    function createHeartFlowers() {
+
+        const points = [];
+
+
+        /* =================================================
+           CONTORNO EXTERIOR
+        ================================================== */
+
+        for (
+            let t = 0;
+            t < Math.PI * 2;
+            t += 0.13
+        ) {
+
+            const p =
+                heartPoint(t);
+
+
+            const x =
+                50 +
+                p.x * 2.05;
+
+            const y =
+                36 -
+                p.y * 1.75;
+
+
+            if (
+                !isInsideTrunk(x, y)
+            ) {
+
+                points.push({
+                    x,
+                    y
+                });
+
+            }
+        }
+
+
+        /* =================================================
+           SEGUNDO CONTORNO
+        ================================================== */
+
+        for (
+            let t = 0;
+            t < Math.PI * 2;
+            t += 0.17
+        ) {
+
+            const p =
+                heartPoint(t);
+
+
+            const x =
+                50 +
+                p.x * 1.72;
+
+            const y =
+                36 -
+                p.y * 1.48;
+
+
+            if (
+                !isInsideTrunk(x, y)
+            ) {
+
+                points.push({
+                    x,
+                    y
+                });
+
+            }
+        }
+
+
+        /* =================================================
+           TERCERA CAPA
+        ================================================== */
+
+        for (
+            let t = 0;
+            t < Math.PI * 2;
+            t += 0.21
+        ) {
+
+            const p =
+                heartPoint(t);
+
+
+            const x =
+                50 +
+                p.x * 1.30;
+
+            const y =
+                36 -
+                p.y * 1.20;
+
+
+            const distanceFromCenter =
+                Math.abs(x - 50);
+
+
+            if (
+                distanceFromCenter < 8 &&
+                y > 30
+            ) {
+
+                continue;
+            }
+
+
+            if (
+                isInsideTrunk(x, y)
+            ) {
+
+                continue;
+            }
+
+
+            points.push({
+                x,
+                y
+            });
+
+        }
+
+
+        /* =================================================
+           CREAR FLORES
+        ================================================== */
+
+        points.forEach(
+            (point, index) => {
+
+                const x =
+                    Math.max(
+                        7,
+                        Math.min(
+                            93,
+                            point.x
+                        )
+                    );
+
+
+                const y =
+                    Math.max(
+                        14,
+                        Math.min(
+                            59,
+                            point.y
+                        )
+                    );
+
+
+                if (
+                    isInsideTrunk(x, y)
+                ) {
+
+                    return;
+                }
+
+
+                createFlower(
+                    x,
+                    y,
+                    index * .045
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       PÉTALO VOLANDO
+    ===================================================== */
+
+    function createFlyingPetal() {
+
+        const petal =
+            document.createElement("div");
+
+        petal.className =
+            "flying-petal";
+
+
+        petal.style.left =
+            (
+                28 +
+                Math.random() * 44
+            ) + "%";
+
+
+        petal.style.top =
+            (
+                18 +
+                Math.random() * 35
+            ) + "%";
+
+
+        const windX =
+            250 +
+            Math.random() * 450;
+
+
+        const windY =
+            -100 +
+            Math.random() * 500;
+
+
+        petal.style.setProperty(
+            "--wind-x",
+            windX + "px"
+        );
+
+
+        petal.style.setProperty(
+            "--wind-y",
+            windY + "px"
+        );
+
+
+        petal.style.setProperty(
+            "--duration",
+            (4 + Math.random() * 5) + "s"
+        );
+
+
+        petalContainer.appendChild(
+            petal
+        );
+
+
+        setTimeout(() => {
+
+            petal.remove();
+
+        }, 10000);
+
+    }
+
+
+    /* =====================================================
+       VIENTO
+    ===================================================== */
+
+    function startWind() {
+
+        setInterval(() => {
+
+            const amount =
+                1 +
+                Math.floor(
+                    Math.random() * 3
+                );
+
+
+            for (
+                let i = 0;
+                i < amount;
+                i++
+            ) {
+
+                setTimeout(
+                    createFlyingPetal,
+                    i * 250
+                );
+
+            }
+
+        }, 850);
+
+    }
+
+
+    /* =====================================================
+       RENOVACIÓN DE FLORES
+    ===================================================== */
+
+    function renewFlowers() {
+
+        setInterval(() => {
+
+            const flowers =
+                document.querySelectorAll(
+                    ".flower"
+                );
+
+
+            if (
+                flowers.length === 0
+            ) {
+
+                return;
+            }
+
+
+            const index =
+                Math.floor(
+                    Math.random() *
+                    flowers.length
+                );
+
+
+            const oldFlower =
+                flowers[index];
+
+
+            const x =
+                oldFlower.dataset.x;
+
+            const y =
+                oldFlower.dataset.y;
+
+
+            oldFlower.style.transition =
+                "opacity .5s ease, transform .5s ease";
+
+
+            oldFlower.style.opacity =
+                "0";
+
+
+            oldFlower.style.transform =
+                "translate(-50%, -50%) scale(0)";
+
+
+            setTimeout(() => {
+
+                oldFlower.remove();
+
+
+                createFlower(
+                    x,
+                    y,
+                    0
+                );
+
+            }, 600);
+
+        }, 1400);
+
+    }
+
+
+    /* =====================================================
+       INICIAR EXPERIENCIA
+    ===================================================== */
+
+    startButton.addEventListener(
+        "click",
+        () => {
+
+            startScreen.classList.add(
+                "hidden"
+            );
+
+
+            /*
+             * Primero crece el árbol.
+             */
+
+            setTimeout(() => {
+
+                createHeartFlowers();
+
+            }, 4500);
+
+
+            /*
+             * Después comienza el viento.
+             */
+
+            setTimeout(() => {
+
+                startWind();
+
+                renewFlowers();
+
+            }, 11000);
+
+        }
+    );
+
+
+</script>
+
+
 </body>
+
 </html>
+```
