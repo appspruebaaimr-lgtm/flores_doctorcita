@@ -895,37 +895,85 @@
 
         @media (max-width: 600px) {
 
+            /*
+             * ====================================================
+             * ADAPTACIÓN PARA TELÉFONOS
+             *
+             * El árbol conserva el mismo SVG y la misma forma
+             * del corazón. Solo reducimos su escala y lo
+             * reubicamos para que haya espacio para el mensaje.
+             * ====================================================
+             */
+
             .moon {
 
-                width: 70px;
-                height: 70px;
+                width: 62px;
+                height: 62px;
 
-                top: 6%;
-                left: 7%;
+                top: 5%;
+                left: 6%;
             }
 
 
             #tree {
 
-                width: 125vw;
+                /*
+                 * Antes era 125vw y hacía que el corazón
+                 * ocupara prácticamente toda la pantalla.
+                 *
+                 * 100vw permite que la copa entre completa
+                 * horizontalmente.
+                 */
+                width: 100vw;
 
-                height: 78%;
+                /*
+                 * Dejamos espacio vertical para el mensaje.
+                 */
+                height: 66%;
 
-                bottom: 7%;
+                bottom: 13%;
+
+                /*
+                 * El SVG conserva su proporción original.
+                 */
+                transform:
+                    translateX(-50%);
             }
 
 
             .flower {
 
-                width: 27px;
-                height: 27px;
+                /*
+                 * Flores ligeramente más pequeñas en móvil
+                 * para que el corazón respire y no se vea
+                 * como una masa amarilla.
+                 */
+                width: 22px;
+                height: 22px;
+            }
+
+
+            .flower-inner {
+
+                width: 7px;
+                height: 7px;
             }
 
 
             .petal {
 
-                width: 12px;
-                height: 19px;
+                width: 10px;
+                height: 17px;
+            }
+
+
+            /*
+             * El suelo baja un poco para no competir con
+             * el mensaje.
+             */
+            .ground {
+
+                height: 12%;
             }
 
 
@@ -934,7 +982,43 @@
                 left: 5%;
                 bottom: 4%;
 
-                width: 62%;
+                /*
+                 * Más ancho porque el mensaje final es largo.
+                 */
+                width: 90%;
+
+                /*
+                 * El texto queda delante del suelo.
+                 */
+                z-index: 30;
+            }
+
+
+            #message h1 {
+
+                /*
+                 * El nombre cabe en una sola línea en la
+                 * mayoría de teléfonos.
+                 */
+                font-size:
+                    clamp(25px, 7vw, 36px);
+            }
+
+
+            #message p {
+
+                /*
+                 * El mensaje final necesita algo menos de
+                 * tamaño en pantallas estrechas.
+                 */
+                font-size:
+                    clamp(14px, 4.2vw, 19px);
+
+                line-height: 1.35;
+
+                margin-top: 8px;
+
+                max-width: 100%;
             }
 
 
