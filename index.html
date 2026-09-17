@@ -1581,12 +1581,12 @@
 
         const points = [];
 
-
         /* =================================================
-           CORAZÓN EXTERIOR
+           FORMA MATEMÁTICA DEL CORAZÓN
 
-           Conservamos la forma original del corazón.
-           Estas flores forman principalmente el contorno.
+           La silueta exterior se conserva exactamente.
+           Después rellenamos solamente EL INTERIOR
+           de esa misma figura.
         ================================================= */
 
         function heartPoint(t) {
@@ -1612,7 +1612,41 @@
 
 
         /* =================================================
+           POLÍGONO DEL CORAZÓN
+
+           Usamos la misma ecuación para obtener
+           la silueta. Esto permite rellenar los huecos
+           sin que las flores salgan de la forma.
+        ================================================= */
+
+        const heartPolygon = [];
+
+        for (
+            let t = 0;
+            t < Math.PI * 2;
+            t += 0.035
+        ) {
+
+            const p =
+                heartPoint(t);
+
+            heartPolygon.push({
+                x:
+                    50 +
+                    p.x * 2.05,
+
+                y:
+                    36 -
+                    p.y * 1.75
+            });
+        }
+
+
+        /* =================================================
            PRIMER CONTORNO
+
+           Se conserva la distribución que ya tenía
+           el corazón.
         ================================================= */
 
         for (
@@ -1662,70 +1696,105 @@
 
 
         /* =================================================
-           TERCERA CAPA
+           PUNTO DENTRO DEL CORAZÓN
 
-           Esta era la zona que originalmente se dejaba
-           demasiado vacía.
-
-           NO rellenamos todo el árbol.
-           Solamente agregamos algunas flores DENTRO
-           del corazón para cerrar el hueco central.
+           Ray casting para comprobar si cada posición
+           pertenece al interior de la silueta.
         ================================================= */
 
-        const innerFlowers = [
+        function isInsideHeart(x, y) {
 
-            // Parte superior interna
-            [42, 27],
-            [50, 27],
-            [58, 27],
+            let inside = false;
 
-            // Zona del corazón
-            [37, 31],
-            [45, 31],
-            [53, 31],
-            [63, 31],
+            for (
+                let i = 0, j = heartPolygon.length - 1;
+                i < heartPolygon.length;
+                j = i++
+            ) {
 
-            [39, 35],
-            [47, 35],
-            [55, 35],
-            [61, 35],
+                const xi =
+                    heartPolygon[i].x;
 
-            // Centro
-            [42, 39],
-            [50, 39],
-            [58, 39],
+                const yi =
+                    heartPolygon[i].y;
 
-            [45, 43],
-            [53, 43],
+                const xj =
+                    heartPolygon[j].x;
 
-            // Parte inferior
-            [48, 47],
-            [52, 47],
+                const yj =
+                    heartPolygon[j].y;
 
-            // Relleno del hueco interno izquierdo
-            [29, 32],
-            [33, 35],
-            [29, 38],
-            [33, 41],
+                const intersects =
+                    (
+                        (yi > y) !== (yj > y)
+                    ) &&
+                    (
+                        x <
+                        (xj - xi) *
+                        (y - yi) /
+                        (yj - yi) +
+                        xi
+                    );
 
-            // Relleno del hueco interno derecho
-            [71, 32],
-            [67, 35],
-            [71, 38],
-            [67, 41]
-        ];
-
-
-        innerFlowers.forEach(
-            ([x, y]) => {
-
-                points.push({
-                    x,
-                    y
-                });
-
+                if (intersects) {
+                    inside = !inside;
+                }
             }
-        );
+
+            return inside;
+        }
+
+
+        /* =================================================
+           RELLENO INTERIOR
+
+           IMPORTANTE:
+           No se rellena toda la copa del árbol.
+
+           Solo se colocan flores dentro de la silueta
+           matemática del corazón.
+
+           La separación evita que quede como una masa
+           completamente uniforme.
+        ================================================= */
+
+        const spacingX = 4.7;
+        const spacingY = 4.7;
+
+        for (
+            let y = 15;
+            y <= 57;
+            y += spacingY
+        ) {
+
+            const row =
+                Math.round(
+                    (y - 15) / spacingY
+                );
+
+            const offset =
+                (row % 2) * (spacingX / 2);
+
+            for (
+                let x = 7 + offset;
+                x <= 93;
+                x += spacingX
+            ) {
+
+                if (
+                    isInsideHeart(
+                        x,
+                        y
+                    )
+                ) {
+
+                    points.push({
+                        x,
+                        y
+                    });
+                }
+            }
+        }
 
 
         /* =================================================
@@ -1758,7 +1827,7 @@
                 createFlower(
                     x,
                     y,
-                    index * .045
+                    index * .035
                 );
             }
         );
